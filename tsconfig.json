@@ -1,0 +1,18 @@
+{
+    "compilerOptions": {
+        "target": "ES2022", // JS features to output/allow: top-level await, class fields
+        "module": "NodeNext", // follow Node's real ESM rules
+        "moduleResolution": "NodeNext", // resolve imports exactly the way Node does at runtime
+        "strict": true, // null checks, no implicit any, etc. Non-negotiable.
+        "noUncheckedIndexedAccess": true, // arr[5] has type T | undefined. Forces you to handle "missing"
+        "skipLibCheck": true, // don't type-check node_modules .d.ts files (faster)
+        "noEmit": true, // tsc only CHECKS; tsx does the running
+        "types": [
+            "node"
+        ] // load @types/node globals
+    },
+    "include": [
+        "src",
+        "tests"
+    ]
+}

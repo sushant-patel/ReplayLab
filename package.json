@@ -1,0 +1,25 @@
+{
+  "name": "replaylab",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev:hello": "tsx src/hello.ts",
+    "typecheck": "tsc --noEmit",
+    "api:baseline": "tsx watch src/apis/baseline.ts",
+    "api:candidate": "tsx watch src/apis/candidate.ts"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "module",
+  "devDependencies": {
+    "@types/node": "^24.19.2",
+    "tsx": "^4.23.15",
+    "typescript": "^7.0.2"
+  },
+  "dependencies": {
+    "fastify": "^5.12.8"
+  }
+}
