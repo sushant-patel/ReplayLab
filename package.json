@@ -1,14 +1,15 @@
 {
   "name": "replaylab",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "description": "API traffic replay and regression detection engine",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "dev:hello": "tsx src/hello.ts",
+    "test": "vitest run",
     "typecheck": "tsc --noEmit",
     "api:baseline": "tsx watch src/apis/baseline.ts",
-    "api:candidate": "tsx watch src/apis/candidate.ts"
+    "api:candidate": "tsx watch src/apis/candidate.ts",
+    "replay": "tsx src/cli.ts",
+    "test:watch": "vitest",
+    "bench": "tsx src/cli.ts bench"
   },
   "keywords": [],
   "author": "",
@@ -16,10 +17,13 @@
   "type": "module",
   "devDependencies": {
     "@types/node": "^24.19.2",
+    "@types/pg": "^8.23.1",
     "tsx": "^4.23.15",
-    "typescript": "^7.0.2"
+    "typescript": "^7.0.2",
+    "vitest": "^5.1.1"
   },
   "dependencies": {
-    "fastify": "^5.12.8"
+    "fastify": "^5.12.8",
+    "pg": "^8.23.1"
   }
 }

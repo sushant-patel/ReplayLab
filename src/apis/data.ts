@@ -1,5 +1,4 @@
-// Synthetic, deterministic dataset shared by BOTH API versions.
-// One source of truth => any difference between v1 and v2 comes from code, not data.
+// Synthetic data shared by both API versions, so any v1/v2 difference comes from code.
 
 export type Role = "admin" | "editor" | "viewer";
 
@@ -8,12 +7,11 @@ export interface User {
   name: string;
   email: string;
   role: Role;
-  createdAt: string; // fixed ISO strings (not new Date()) so output is deterministic
-  address: { city: string; country: string }; // nested object -> exercises recursive diff
-  tags: string[]; // array -> exercises array diff (some are empty on purpose)
+  createdAt: string; // fixed, so responses are deterministic
+  address: { city: string; country: string };
+  tags: string[]; // some empty on purpose (nullEmptyTags)
 }
 
-// `readonly` stops handlers from accidentally mutating shared data (e.g. calling .sort() in place).
 export const users: readonly User[] = [
   { id: 101, name: "Rahul", email: "rahul@example.com", role: "admin", createdAt: "2024-01-15T10:00:00.000Z", address: { city: "Bengaluru", country: "IN" }, tags: ["beta", "billing"] },
   { id: 102, name: "Ananya", email: "ananya@example.com", role: "viewer", createdAt: "2024-02-03T08:30:00.000Z", address: { city: "Pune", country: "IN" }, tags: [] },
