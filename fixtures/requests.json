@@ -1,0 +1,22 @@
+[
+  { "id": "health-1", "method": "GET", "path": "/health", "headers": { "accept": "application/json" } },
+  { "id": "user-101", "method": "GET", "path": "/users/101", "headers": { "accept": "application/json" } },
+  { "id": "user-102", "method": "GET", "path": "/users/102", "headers": { "accept": "application/json" } },
+  { "id": "user-103", "method": "GET", "path": "/users/103", "headers": { "accept": "application/json" } },
+  { "id": "user-104", "method": "GET", "path": "/users/104", "headers": { "accept": "application/json" } },
+  { "id": "user-105", "method": "GET", "path": "/users/105", "headers": { "accept": "application/json" } },
+  { "id": "user-106", "method": "GET", "path": "/users/106", "headers": { "accept": "application/json" } },
+  { "id": "user-107", "method": "GET", "path": "/users/107", "headers": { "accept": "application/json" } },
+  { "id": "user-108", "method": "GET", "path": "/users/108", "headers": { "accept": "application/json" } },
+  { "id": "user-109", "method": "GET", "path": "/users/109", "headers": { "accept": "application/json" } },
+  { "id": "user-110", "method": "GET", "path": "/users/110", "headers": { "accept": "application/json" } },
+  { "id": "user-999-missing", "method": "GET", "path": "/users/999", "headers": { "accept": "application/json" } },
+  { "id": "user-500-missing", "method": "GET", "path": "/users/500", "headers": { "accept": "application/json" } },
+  { "id": "user-invalid-id", "method": "GET", "path": "/users/abc", "headers": { "accept": "application/json" } },
+  { "id": "list-default", "method": "GET", "path": "/users", "headers": { "accept": "application/json" } },
+  { "id": "list-limit-3", "method": "GET", "path": "/users?limit=3", "headers": { "accept": "application/json" } },
+  { "id": "list-admins", "method": "GET", "path": "/users?role=admin", "headers": { "accept": "application/json" } },
+  { "id": "list-viewers-2", "method": "GET", "path": "/users?role=viewer&limit=2", "headers": { "accept": "application/json" } },
+  { "id": "list-unknown-role", "method": "GET", "path": "/users?role=superuser", "headers": { "accept": "application/json" } },
+  { "id": "health-2", "method": "GET", "path": "/health", "headers": { "accept": "application/json" } }
+]

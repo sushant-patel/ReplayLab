@@ -1,0 +1,19 @@
+{
+  "baselineUrl": "http://127.0.0.1:3001",
+  "candidateUrl": "http://127.0.0.1:3002",
+  "fixtures": "fixtures/requests.json",
+  "timeoutMs": 2000,
+  "concurrency": 10,
+  "repeat": 5,
+  "warmupRequests": 5,
+  "ignorePaths": ["$.timestamp", "$.requestId", "$.version"],
+  "compareHeaders": ["content-type"],
+  "thresholds": {
+    "maxFailedRequests": 0,
+    "maxCandidateErrorRatePct": 0,
+    "p95RegressionPct": 25,
+    "p95ToleranceMs": 5,
+    "minSamplesForLatency": 10,
+    "addedFieldsAreBreaking": false
+  }
+}
