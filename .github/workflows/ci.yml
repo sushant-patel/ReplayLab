@@ -1,0 +1,61 @@
+name: ci
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      - run: npm run typecheck
+      - run: npm test
+
+  replay-gate:
+    needs: test
+    runs-on: ubuntu-latest
+    env:
+      LOG_LEVEL: warn
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+
+      - name: Start baseline, clean candidate and a deliberately regressed candidate
+        run: |
+          nohup npx tsx src/apis/baseline.ts > baseline.log 2>&1 &
+          REGRESSIONS=none nohup npx tsx src/apis/candidate.ts > candidate.log 2>&1 &
+          PORT=3003 REGRESSIONS=all nohup npx tsx src/apis/candidate.ts > regressed.log 2>&1 &
+          for i in $(seq 1 30); do
+            curl -sf http://127.0.0.1:3001/health && curl -sf http://127.0.0.1:3002/health && curl -sf http://127.0.0.1:3003/health && exit 0
+            sleep 1
+          done
+          echo "APIs did not start"; exit 1
+
+      - name: Gate - clean candidate must pass (exit 0)
+        run: npm run replay -- --report reports/clean.html
+
+      - name: Self-check - regressed candidate must be caught (exit 1)
+        run: |
+          set +e
+          npm run replay -- --candidate http://127.0.0.1:3003 --report reports/regressed.html
+          code=$?
+          set -e
+          echo "exit code: $code"
+          test "$code" -eq 1
+
+      - name: Upload reports
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: replaylab-reports
+          path: reports/
